@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-scroll";
+import { Menu } from "lucide-react"; // three-dot menu icon
 
 const Navbar = () => {
+  const [open, setOpen] = useState(false);
+
   const navLinks = [
     { id: "hero", label: "Home" },
     { id: "about", label: "About" },
@@ -15,7 +18,7 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center px-6">
         <h1 className="text-xl font-bold cursor-pointer">My Portfolio</h1>
 
-        <div className="space-x-6">
+        <div className="hidden md:flex space-x-6">
           {navLinks.map((link) => (
             <Link
               key={link.id}
@@ -31,7 +34,46 @@ const Navbar = () => {
             </Link>
           ))}
         </div>
+
+        <div className="md:hidden flex items-center space-x-4">
+          <Link
+            to="hero"
+            smooth={true}
+            duration={500}
+            spy={true}
+            offset={-70}
+            activeClass="text-indigo-500 font-semibold"
+            className="cursor-pointer hover:text-indigo-400 transition-colors duration-200"
+          >
+            Home
+          </Link>
+          <button onClick={() => setOpen(!open)}>
+            <Menu className="w-6 h-6" />
+          </button>
+        </div>
       </div>
+
+      {open && (
+        <div className="md:hidden mt-2 bg-gray-800 p-4 rounded-lg flex flex-col items-center space-y-3">
+          {navLinks
+            .filter((link) => link.label !== "Home")
+            .map((link) => (
+              <Link
+                key={link.id}
+                to={link.id}
+                smooth={true}
+                duration={500}
+                spy={true}
+                offset={-70}
+                activeClass="text-indigo-500 font-semibold"
+                className="cursor-pointer hover:text-indigo-400 transition-colors duration-200"
+                onClick={() => setOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+        </div>
+      )}
     </nav>
   );
 };
