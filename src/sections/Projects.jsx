@@ -45,9 +45,12 @@ const Projects = () => {
 
         <div className="grid md:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <div
+            <a
               key={index}
-              className="relative group rounded-xl overflow-hidden shadow-lg bg-white cursor-pointer"
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative group rounded-xl overflow-hidden shadow-lg bg-white block"
               onMouseEnter={() => {
                 setHoverColor("bg-black");
                 setTextColor("text-white");
@@ -62,21 +65,16 @@ const Projects = () => {
                 alt={project.title}
                 className="w-full h-60 object-cover transform group-hover:scale-110 transition duration-500"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-center opacity-0 group-hover:opacity-100 transition duration-500">
+              <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-center opacity-0 group-hover:opacity-100 transition duration-500 p-4">
                 <h3 className="text-2xl font-semibold text-white mb-3">
                   {project.title}
                 </h3>
-                <p className="text-gray-200 px-4 mb-4">{project.description}</p>
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-white text-gray-900 px-5 py-2 rounded-lg font-medium hover:bg-gray-200 transition"
-                >
+                <p className="text-gray-200 text-sm">{project.description}</p>
+                <span className="mt-4 inline-block bg-white text-gray-900 px-5 py-2 rounded-lg font-medium">
                   View Project
-                </a>
+                </span>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
