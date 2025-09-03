@@ -4,9 +4,9 @@ import { Menu } from "lucide-react";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("hero"); // default active section = Home
-  const menuRef = useRef(null); // for dropdown wrapper
-  const buttonRef = useRef(null); // for menu button
+  const [active, setActive] = useState("hero");
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
 
   const navLinks = [
     { id: "hero", label: "Home" },
@@ -16,7 +16,6 @@ const Navbar = () => {
     { id: "contact", label: "Contact" },
   ];
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (
@@ -39,10 +38,8 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 w-full bg-gray-900 text-white py-4 shadow-md z-50">
       <div className="container mx-auto flex justify-between items-center px-6">
-        {/* Logo */}
         <h1 className="text-xl font-bold cursor-pointer">My Portfolio</h1>
 
-        {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6">
           {navLinks.map((link) => (
             <Link
